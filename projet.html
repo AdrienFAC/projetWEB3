@@ -1,0 +1,52 @@
+<!doctype html>
+<html lang="fr">
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+		<script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+		<script type="text/javascript">
+			//Nom de la base de donnee
+			const FILE_NAME = "test.json";
+			
+			$(document).ready(function() {
+				//Liste des elements de la BDD
+				var listeItems = [];
+				
+				//Lecture de la base de donnee
+				$.ajax({
+					type: "GET",
+					dataType: "json",
+					url: FILE_NAME,
+					success: function(data) {
+						for (var i = 0; i < data.length; i++)
+						{
+							var item = {datetime:data[i].datetime,
+										city:data[i].city,
+										state:data[i].state,
+										country:data[i].country,
+										shape:data[i].shape,
+										second:data[i].second,
+										durationhm:data[i].durationhm,
+										comments:data[i].comments,
+										dateposted:data[i].dateposted,
+										latitude:data[i].latitude,
+										longitude:data[i].longitude};
+							listeItems.push(item);
+							console.log(item.latitude + "/" + item.longitude); //debug
+						}
+					},
+					error: function(jqXHR, textStatus, errorThrown) {
+						console.log(errorThrown);
+					}
+				});
+
+				
+			});
+			
+		</script>
+	</head>
+	<body>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js" integrity="sha384-vFJXuSJphROIrBnz7yo7oB41mKfc8JzQZiCq4NCceLEaO4IHwicKwpJf9c9IpFgh" crossorigin="anonymous"></script>
+		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js" integrity="sha384-alpBpkh1PFOepccYVYDB4do5UnbKysX5WZXm3XxPqe5iKTfUKjNkCk9SaVuEZflJ" crossorigin="anonymous"></script>
+	</body>
+</html>
